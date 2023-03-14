@@ -5,18 +5,54 @@ loadSprite("bean", "assets/egg1.png")
 
 add([
   sprite("bg", {width: width(), height: height()}),
+  z(-2),
 ]);
 
 add([
-  sprite("bean"),
+  sprite("bean"),          
   pos(center()),
+  "bean",
+  z(1)
+]);
+
+const box = add([
+  rect(600, 300),
+  pos(400,150),
+  color(163, 199, 188),
+  z(2)
+]);
+const myText = add([
+  text("ohhhh, fun little easter egg!"),
+  pos(430,280),
+  scale(0.6),
+  color(255, 255, 255),
+  z(3)
 ]);
 
 loadSprite("bg", "assets/bg.jpg");
 
 
+myText.text ="Press the space bar to hatch your dinosaur!"
+// const background = add([
+//   rect(width(5), height(4)),
+//   pos(center()),
+//   color(1, 1, 1),
+//   z(-2), // set the background entity to be behind other entities
+// ]);
 
+// const rulesText = add([
+//   text("Welcome to Pangea! Press the space bar to hatch your dinosaur.\n\n"),
+//   pos(390,300,),
+//   scale(0.5),
+//   color(0, 0, 0),
+//   z(1), // set the background entity to be behind other entities
+// ]);
 
+// Detect when space bar is pressed and remove the rules text
+onKeyPress("space", () => {
+  destroy(myText);
+  destroy(box);
+});
 
 
 
@@ -24,14 +60,9 @@ loadSprite("bg", "assets/bg.jpg");
 const PRESS_COUNT = 10;
 
 
-loadSprite("bean", "assets/egg1.png");
-
 loadSprite("alternate-image", "assets/egg2.png");
-
 loadSprite("egg3", "assets/egg3.png")
-
 loadSprite("egg4", "assets/egg4.png");
-
 loadSprite("egg5", "assets/egg5.png");
 
 
@@ -43,35 +74,71 @@ onKeyPress("space", () => {
  
   counter++;
 
-  // if counter reaches PRESS_COUNT, change the image
   if (counter === PRESS_COUNT) {
     
+    destroy(get("bean")[0]);
     add([
       sprite("alternate-image"),
       pos(center()),
+      "alternate-image",
     ]);
 
   }
   if (counter === 20) {
     
+    destroy(get("alternate-image")[0]);
     add([
       sprite("egg3"),
       pos(center()),
+      "egg3",
     ]);
   }
   if (counter === 30) {
     
+    destroy(get("egg3")[0]);
     add([
       sprite("egg4"),
       pos(center()),
+      "egg4",
     ]);
   }
   if (counter === 40) {
     
+    destroy(get("egg4")[0]);
     add([
       sprite("egg5"),
       pos(center()),
-    ]);
+      "egg5",
+    ]);  
+  const dialogBox = document.createElement("div");
+  dialogBox.innerHTML = `
+    <p>Nice! Please name your dino:</p>
+    <input type="text" id="name-input">
+    <button id="submit-button">Submit</button>
+  `;
+  dialogBox.style.position = "absolute";
+  dialogBox.style.top = "50%";
+  dialogBox.style.left = "50%";
+  dialogBox.style.transform = "translate(-50%, -50%)";
+  dialogBox.style.backgroundColor = "white";
+  dialogBox.style.padding = "20px";
+  dialogBox.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+  dialogBox.style.zIndex = "9999";
+  document.body.appendChild(dialogBox);
+
+  const nameInput = document.getElementById("name-input");
+  const submitButton = document.getElementById("submit-button");
+
+  submitButton.addEventListener("click", () => {
+    const name = nameInput.value;
+    console.log("The player's name is: ", name);
+    document.body.removeChild(dialogBox);
+  });
   }
+
 });
+
+
+
+
 

@@ -8,22 +8,22 @@ add([
   z(-2),
 ]);
 
-add([
-  sprite("bean"),          
-  pos(center()),
-  "bean",
-  z(1)
-]);
+// add([
+//   sprite("bean"),          
+//   pos(center()),
+//   "bean",
+//   z(1)
+// ]);
 
 const box = add([
   rect(600, 300),
-  pos(400,150),
+  pos(350,150),
   color(163, 199, 188),
   z(2)
 ]);
 const myText = add([
   text("ohhhh, fun little easter egg!"),
-  pos(430,280),
+  pos(400,280),
   scale(0.6),
   color(255, 255, 255),
   z(3)
@@ -33,20 +33,7 @@ loadSprite("bg", "assets/bg.jpg");
 
 
 myText.text ="Press the space bar to hatch your dinosaur!"
-// const background = add([
-//   rect(width(5), height(4)),
-//   pos(center()),
-//   color(1, 1, 1),
-//   z(-2), // set the background entity to be behind other entities
-// ]);
 
-// const rulesText = add([
-//   text("Welcome to Pangea! Press the space bar to hatch your dinosaur.\n\n"),
-//   pos(390,300,),
-//   scale(0.5),
-//   color(0, 0, 0),
-//   z(1), // set the background entity to be behind other entities
-// ]);
 
 // Detect when space bar is pressed and remove the rules text
 onKeyPress("space", () => {
@@ -74,6 +61,15 @@ onKeyPress("space", () => {
  
   counter++;
 
+  if (counter === 1) {
+    
+    add([
+      sprite("bean"),
+      pos(center()),
+      "bean",
+    ]);
+
+  }
   if (counter === PRESS_COUNT) {
     
     destroy(get("bean")[0]);
@@ -110,7 +106,10 @@ onKeyPress("space", () => {
       pos(center()),
       "egg5",
     ]);  
-  const dialogBox = document.createElement("div");
+  }
+  if (counter === 42) {
+    
+      const dialogBox = document.createElement("div");
   dialogBox.innerHTML = `
     <p>Nice! Please name your dino:</p>
     <input type="text" id="name-input">
@@ -121,7 +120,7 @@ onKeyPress("space", () => {
   dialogBox.style.left = "50%";
   dialogBox.style.transform = "translate(-50%, -50%)";
   dialogBox.style.backgroundColor = "white";
-  dialogBox.style.padding = "20px";
+  dialogBox.style.padding = "69px";
   dialogBox.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
   dialogBox.style.zIndex = "9999";
   document.body.appendChild(dialogBox);
@@ -135,7 +134,8 @@ onKeyPress("space", () => {
     document.body.removeChild(dialogBox);
   });
   }
-
+  
+  
 });
 
 

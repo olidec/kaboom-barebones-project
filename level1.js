@@ -25,7 +25,7 @@ const box = add([
 const myText = add([
   text("ohhhh, fun little easter egg!"),
   pos(400,280),
-  scale(0.6),
+  scale(0.24),
   color(255, 255, 255),
   z(3)
 ]);
@@ -36,20 +36,19 @@ loadSprite("bg", "assets/bg.jpg");
 myText.text ="Press the space bar to hatch your dinosaur!"
 
 
-// Detect when space bar is pressed and remove the rules text
 onKeyPress("space", () => {
   destroy(myText);
   destroy(box);
 });
 
-// define the number of times space bar needs to be pressed
 const PRESS_COUNT = 10;
-
 
 loadSprite("alternate-image", "assets/egg2.png");
 loadSprite("egg3", "assets/egg3.png")
 loadSprite("egg4", "assets/egg4.png");
 loadSprite("egg5", "assets/egg5.png");
+loadSprite("egg6", "assets/egg6.png");
+loadSprite("eggDino", "assets/eggDino.png");
 
 
 
@@ -115,7 +114,29 @@ onKeyPress("space", () => {
       "egg5",
     ]);  
   }
-  if (counter === 42) {
+  if (counter === 50) {
+    
+    destroy(get("egg5")[0]);
+    add([
+      sprite("egg6"),
+      pos(center()),
+      scale(0.5),
+      pos(400,280),
+      "egg6",
+    ]);
+  }
+  if (counter === 60) {
+    
+    destroy(get("egg6")[0]);
+    add([
+      sprite("eggDino"),
+      pos(center()),
+      scale(0.5),
+      pos(400,280),
+      "eggDino",
+    ]);
+  }
+  if (counter === 62) {
     
       const dialogBox = document.createElement("div");
   dialogBox.innerHTML = `
@@ -129,7 +150,7 @@ onKeyPress("space", () => {
   dialogBox.style.transform = "translate(-50%, -50%)";
   dialogBox.style.backgroundColor = "white";
   dialogBox.style.padding = "69px";
-  dialogBox.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+  dialogBox.style.boxShadow = "0 0 10px rgba(255,211,155, 0.5)";
   dialogBox.style.zIndex = "9999";
   document.body.appendChild(dialogBox);
 
@@ -142,10 +163,8 @@ onKeyPress("space", () => {
     document.body.removeChild(dialogBox);
   });
   }
-  
-  
-});
 
+});
 
 
 

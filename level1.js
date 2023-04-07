@@ -21,6 +21,7 @@ const box = add([
   color(163, 199, 188),
   z(2)
 ]);
+
 const myText = add([
   text("ohhhh, fun little easter egg!"),
   pos(400,280),
@@ -40,8 +41,6 @@ onKeyPress("space", () => {
   destroy(myText);
   destroy(box);
 });
-
-
 
 // define the number of times space bar needs to be pressed
 const PRESS_COUNT = 10;
@@ -65,7 +64,8 @@ onKeyPress("space", () => {
     
     add([
       sprite("bean"),
-      pos(center()),
+      pos(400,280),
+      scale(0.5),
       "bean",
     ]);
 
@@ -76,6 +76,8 @@ onKeyPress("space", () => {
     add([
       sprite("alternate-image"),
       pos(center()),
+      scale(0.5),
+      pos(400,280),
       "alternate-image",
     ]);
 
@@ -86,6 +88,8 @@ onKeyPress("space", () => {
     add([
       sprite("egg3"),
       pos(center()),
+      scale(0.5),
+      pos(400,280),
       "egg3",
     ]);
   }
@@ -95,6 +99,8 @@ onKeyPress("space", () => {
     add([
       sprite("egg4"),
       pos(center()),
+      scale(0.5),
+      pos(400,280),
       "egg4",
     ]);
   }
@@ -104,6 +110,8 @@ onKeyPress("space", () => {
     add([
       sprite("egg5"),
       pos(center()),
+      scale(0.5),
+      pos(400,280),
       "egg5",
     ]);  
   }

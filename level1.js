@@ -3,6 +3,8 @@ kaboom();
 
 loadSprite("bean", "assets/egg1.png")
 
+loadSound("crack", "assets/crack.mp3")
+
 add([
   sprite("bg", {width: width(), height: height()}),
   z(-2),
@@ -79,6 +81,7 @@ onKeyPress("space", () => {
       pos(400,280),
       "alternate-image",
     ]);
+    play("crack")
 
   }
   if (counter === 20) {
@@ -91,6 +94,7 @@ onKeyPress("space", () => {
       pos(400,280),
       "egg3",
     ]);
+    play("crack")
   }
   if (counter === 30) {
     
@@ -102,6 +106,7 @@ onKeyPress("space", () => {
       pos(400,280),
       "egg4",
     ]);
+    play("crack")
   }
   if (counter === 40) {
     
@@ -113,6 +118,7 @@ onKeyPress("space", () => {
       pos(400,280),
       "egg5",
     ]);  
+    play("crack")
   }
   if (counter === 50) {
     
@@ -123,6 +129,7 @@ onKeyPress("space", () => {
       scale(0.5),
       pos(400,280),
       "egg6",
+      play("crack")
     ]);
   }
   if (counter === 60) {
@@ -134,6 +141,7 @@ onKeyPress("space", () => {
       scale(0.5),
       pos(400,280),
       "eggDino",
+      play("crack")
     ]);
   }
   if (counter === 62) {

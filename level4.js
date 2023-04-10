@@ -4,6 +4,8 @@ kaboom({
 
 loadSprite("jnrDino", "assets/dino.png")
 loadSprite("jnrObstacle", "assets/obstacle.png")
+loadSound("dinoJump", "assets/dinoJump.mp3")
+
 //  {
 //   "jnrDino": {
 //     x: 0,
@@ -61,6 +63,7 @@ add([
   keyPress("space", () => {
     if (dino.pos.y > 240)
     dino.jump(750)
+    play("dinoJump")
   })
   
   action("Object", (Object) =>{

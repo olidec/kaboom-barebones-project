@@ -19,6 +19,7 @@ const Dino = add([
   pos(width() / 2, height() / 1.5),
   scale(0.25),
   area(),
+  "dino"
 ]);
 
 onKeyDown("left", () => {
@@ -37,6 +38,7 @@ onKeyDown("down", () => {
   Dino.move(0, 200);
 });
 
+
 const randomNugget1 = choose(["nugget1","nugget2","nugget3","burntNugget1","burntNugget2","burntNugget3"])
 const randomNugget2 = choose(["nugget1","nugget2","nugget3","burntNugget1","burntNugget2","burntNugget3"])
 const randomNugget3 = choose(["nugget1","nugget2","nugget3","burntNugget1","burntNugget2","burntNugget3"])
@@ -51,7 +53,9 @@ function addNuggets() {
   pos(rand(vec2(width(), 10))),
   scale(0.15),
   area(),
+  solid(),
   body(),
+  "randomNugget1",
 ]);
   })
 }
@@ -65,7 +69,9 @@ function addMoreNuggets1() {
   pos(rand(vec2(width(), 10))),
   scale(0.15),
   area(),
+  solid(),
   body(),
+  "randomNugget2",
 ]);
   })
 }
@@ -79,7 +85,9 @@ function addMoreNuggets2() {
   pos(rand(vec2(width(), 10))),
   scale(0.15),
   area(),
+  solid(),
   body(),
+  "randomNugget3",
 ]);
   })
 }
@@ -93,7 +101,9 @@ function addMoreNuggets3() {
   pos(rand(vec2(width(), 10))),
   scale(0.15),
   area(),
+  solid(),
   body(),
+  "randomNugget4",
 ]);
   })
 }
@@ -106,7 +116,9 @@ function thereHasToBeABetterWayToDoThis() {
   pos(rand(vec2(width(), 10))),
   scale(0.15),
   area(),
+  solid(),
   body(),
+  "randomNugget6",
 ]);
   })
 }
@@ -118,25 +130,25 @@ addMoreNuggets3()
 thereHasToBeABetterWayToDoThis()
 
 
-
-onCollide("dino","nugget1", () => {
-  destroy
-})
-onCollide("dino","nugget2", () => {
-  
-})
-onCollide("dino","nugget3", () => {
-  
+onCollide("dino","randomNugget1", () => {
+  destroy(randomNugget1)
 })
 
-onCollide("dino","burntNugget1", () => {
-  go("gameover")
+onCollide("dino","randomNugget2", () => {
+  destroy(randomNugget2)
 })
-onCollide("dino","burntNugget2", () => {
-  go("gameover")
+onCollide("dino","randomNugget3", () => {
+  destroy(randomNugget3)
 })
-onCollide("dino","burntNugget3", () => {
-  go("gameover")
+
+onCollide("dino","randomNugget4", () => {
+  destroy(randomNugget4)
+})
+// onCollide("dino","randomNugget5", () => {
+//   go("gameover")
+// })
+onCollide("dino","randomNugget6", () => {
+  destroy(randomNugget6)
 })
 
 // action("Object", (Object) =>{

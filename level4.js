@@ -21,6 +21,10 @@ loadSound("dinoJump", "assets/dinoJump.mp3")
 //   }
 // })
 
+
+
+
+
 let score = 0
 
 scene("gameover", () => {
@@ -34,6 +38,34 @@ onKeyPress("space", () => {
     go("game")
   })
 })
+
+
+const box = add([
+  rect(600, 300),
+  pos(350,150),
+  color(92,172,238),
+  z(2)
+]);
+
+const myText = add([
+  text("ohhhh, fun little easter egg!"),
+  pos(400,280),
+  scale(0.28),
+  color(255, 255, 255),
+  z(3)
+]);
+
+
+myText.text ="Press space bar to jump over obstacles!"
+
+
+
+onKeyPress("space", () => {
+destroy(myText);
+destroy(box);
+go('game');
+});
+
 
 scene("game", () => {
 
@@ -99,4 +131,4 @@ onCollide("dino","Object", () => {
 
  
 
-go("game")
+// go("game")

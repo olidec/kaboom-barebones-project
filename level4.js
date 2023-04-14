@@ -1,98 +1,134 @@
-kaboom();
+kaboom({
+    background: [202,225,255],
+ })  
 
-loadSprite("dino", "assets/dino.png");
-loadSprite("jrbg", "assets/jrbg.jpg")
+loadSprite("jnrDino", "assets/dino.png")
+loadSprite("jnrObstacle", "assets/obstacle.png")
+loadSound("dinoJump", "assets/dinoJump.mp3")
+
+//  {
+//   "jnrDino": {
+//     x: 0,
+//     y: 0,
+//     width: 520,
+//     height: 94,
+//     sliceX: 4,
+//     anims: {
+//       idle: { from: 0, to: 0},
+//       run: { from: 1, to: 3},
+//       dead: { from: 4, to: 5},
+//     }
+//   }
+// })
+
+
+
+
+
+let score = 0
+
+scene("gameover", () => {
+  add([
+    text("Game Over\n" + "Score:" + score),
+    pos(420,200),
+
+  ])
+
+onKeyPress("space", () => {
+    go("game")
+  })
+})
+
+
+const box = add([
+  rect(600, 300),
+  pos(350,150),
+  color(92,172,238),
+  z(2)
+]);
+
+const myText = add([
+  text("ohhhh, fun little easter egg!"),
+  pos(400,280),
+  scale(0.28),
+  color(255, 255, 255),
+  z(3)
+]);
+
+
+myText.text ="Press space bar to jump over obstacles!"
+
+
+
+onKeyPress("space", () => {
+destroy(myText);
+destroy(box);
+go('game');
+});
+
+
+scene("game", () => {
+
+  score = 0
+
+  const score_count = add([
+    text(score)
+  ])
+
+    const dino = add([
+      pos(width()/2-100,100),
+      sprite("jnrDino"),
+      scale(0.18),
+      area(),
+      body(),
+      "dino"
+])
 
 add([
-    sprite("dino"),
-    pos(80, 300),
-    scale(0.25), 
-  ]);
+  pos(0,399),
+  rect(width(),height()),
+  color(255,165,79),
+  area(),
+  solid(),
+])
+  
+  keyPress("space", () => {
+    if (dino.pos.y > 240)
+    dino.jump(750)
+    play("dinoJump")
+  })
+  
+  action("Object", (Object) =>{
+    if (Object.passed == false && Object.pos.x < dino.pos.x) {
+      Object.passed = true
+      score += 1
+      score_count.text = score
+    }
+    Object.move(-300, 0)
+  })
 
-  add([
-    sprite("jrbg", {width: width(), height: height()}),
-    z(-2),
-  ]);
-// const k = kaboom({
-//     global: true,
-//     fullscreen: true,
-//     scale: 1,
-//     debug: true,
-//   });
+  function addObs() {
+
+    loop(2,() => {
+        add([
+            pos(width(),335),
+            sprite("jnrObstacle"),
+            scale(0.033),
+            area(),
+            body(),
+            "Object",
+            { passed: false}
+            ])
+    })
+}
   
-//   // Define game constants
-//   const JUMP_FORCE = 700;
-//   const FALL_DEATH_HEIGHT = 1200;
-//   const GROUND_LEVEL = height() - 100;
-  
-//   // Load game assets
-//   loadRoot("https://i.imgur.com/");
-//   loadSprite("dino", "assets/dino.png");
-//   loadSprite("cactus", "cactus.png");
-  
-//   // Define game objects and behavior
-//   add([
-//     sprite("dino"),
-//     pos(80, GROUND_LEVEL),
-//     body(),
-//     "player",
-//   ]);
-  
-//   add([
-//     sprite("cactus"),
-//     pos(width(), GROUND_LEVEL),
-//     "obstacle",
-//   ]);
-  
-//   keyPress("space", () => {
-//     if (isPlayerOnGround()) {
-//       jumpPlayer();
-//     }
-//   });
-  
-//   function jumpPlayer() {
-//     play("jump.mp3");
-//     get("player").jump(JUMP_FORCE);
-//   }
-  
-//   function isPlayerOnGround() {
-//     return get("player").pos.y >= GROUND_LEVEL;
-//   }
-  
-//   function createObstacle() {
-//     add([
-//       sprite("cactus"),
-//       pos(width(), GROUND_LEVEL),
-//       origin("botleft"),
-//       "obstacle",
-//     ]);
-//     wait(rand(1, 2), () => {
-//       createObstacle();
-//     });
-//   }
-  
-//   createObstacle();
-  
-//   // Define game over behavior
-//   action("player", (p) => {
-//     if (p.pos.y >= FALL_DEATH_HEIGHT) {
-//       go("gameover", score());
-//     }
-//   });
-  
-//   // Define collision behavior
-//   collides("player", "obstacle", () => {
-//     go("gameover", score());
-//   });
-  
-//   // Define game over scene
-//   scene("gameover", (score) => {
-//     add([
-//       text(`Score: ${score}`),
-//       pos(width() / 2, height() / 2),
-//       origin("center"),
-//     ]);
-//   });
-  
-//   // Start the game
-//   go("main");
+onCollide("dino","Object", () => {
+  go("gameover")
+})
+
+  addObs()
+})
+
+ 
+
+// go("game")

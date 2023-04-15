@@ -1,7 +1,7 @@
 kaboom()
 
-loadSprite("player", "assets/dino.png");
-loadSprite("enemy", "assets/eggDino.png");
+loadSprite("player", "assets/sfEnemy.png");
+loadSprite("enemy", "assets/sfPlayer.png");
 loadSprite("sfbg", "assets/sfbg.jpg");
 
 add([
@@ -9,8 +9,8 @@ add([
 ])
 
 add([
-  pos(0,550),
-  rect(width(),height()/4),
+  pos(0,560),
+  rect(width(),height()/5),
   color(255,255,255,0.2),
   area(),
   solid(),
@@ -19,7 +19,7 @@ add([
 const player = add([
   sprite("player"),
   pos(800, 420),
-  scale(0.25),
+  scale(0.5),
   body(),
   area(),
   "player"
@@ -28,7 +28,7 @@ const player = add([
 const enemy = add([
   sprite("enemy"),
   pos(280, 420),
-  scale(0.33),
+  scale(0.5),
   area(),
   body(),
   "enemy"

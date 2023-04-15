@@ -1,6 +1,6 @@
 kaboom();
 
-loadSprite("dino", "assets/dino.png");
+loadSprite("dino", "assets/nuggetDino.png");
 loadSprite("bg2", "assets/bg2.png");
 loadSprite("nugget1", "assets/nugget1.png");
 loadSprite("nugget2", "assets/nugget2.png");
@@ -46,8 +46,8 @@ onKeyPress("space", () => {
 scene('game', () => {
  let dino = add([
   sprite("dino"),
-  pos(width() / 2, height() / 1.5),
-  scale(0.25),
+  pos(width() / 2, height() / 1.41),
+  scale(0.24),
   area(),
   "dino"
 ]);

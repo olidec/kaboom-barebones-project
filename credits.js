@@ -1,6 +1,6 @@
-kaboom()
+kaboom();
 
-
+add([rect(width(), height()), color(98, 160, 83, 0.877)])
 
 // const box = add([
 // 	rect(600, 300),

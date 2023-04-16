@@ -67,12 +67,12 @@
 #credits {
     position: absolute;
         top: 6%;
-        left: 90%; 
+        left: 87%; 
         width: 6%;
         height: 1%;
         /* transform: translate(-50%, -50%); */
         text-decoration: none;
-		padding: 20px;
+		padding: 15px;
         background-color: rgba(98, 160, 83, 0.877);
         z-index: 99999;
 }
@@ -150,7 +150,7 @@
 		document.addEventListener("keydown", function(event) {
 			if (event.keyCode === 32) {
 				document.getElementById("image-container").classList.add("hidden");
-                document.getElementById("credits-container").classList.add("hidden");
+                // document.getElementById("credits-container").classList.add("hidden");
 				document.body.style.overflow = "";
 				document.body.style.setProperty("opacity", "0");
                 document.getElementById("text-box").classList.add("hidden");
@@ -171,7 +171,7 @@
 	<a href="level3.html" id="level3" type="text/javascript">Level 3</a><br>
 	<a href="level4.html" id="level4" type="text/javascript">Level 4</a><br>
 	<a href="level5.html" id="level5" type="text/javascript">Level 5</a><br>
-    <a href="credits.js" id="credits" type="text/javascript">credits</a><br>
+    <a href="credits.html" id="credits" type="text/javascript">credits</a><br>
 
 </body>
 </html>

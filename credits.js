@@ -9,11 +9,11 @@ const box = add([
 	z(2)
   ]);
   
-add([
-	text("Luana Strachan\nFanny Heier\nEmilie Huynh\nAnn-Sophie Bullinger"),
-	pos(400,280),
-	scale(0.28),
-	color(0, 100, 60),
-    z(6),
-  ]);
+//   const myText = add([
+// 	text("ohhhh, fun little easter egg!"),
+// 	pos(400,280),
+// 	scale(0.28),
+// 	color(255, 255, 255),
+//   ]);
+  
   

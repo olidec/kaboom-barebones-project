@@ -1,7 +1,7 @@
 kaboom()
 
-loadSprite("player", "assets/dino.png");
-loadSprite("enemy", "assets/eggDino.png");
+loadSprite("player", "assets/sfPlayer.png");
+loadSprite("enemy", "assets/sfEnemy.png");
 loadSprite("sfbg", "assets/sfbg.jpg");
 
 add([
@@ -9,53 +9,197 @@ add([
 ])
 
 add([
-  pos(0,550),
-  rect(width(),height()/4),
+  pos(0,560),
+  rect(width(),height()/5),
   color(255,255,255,0.2),
   area(),
   solid(),
 ])
 
-const player = add([
-  sprite("player"),
-  pos(800, 420),
-  scale(0.25),
-  body(),
-  area(),
-  "player"
-]);
-
 const enemy = add([
   sprite("enemy"),
-  pos(280, 420),
-  scale(0.33),
-  area(),
+  pos(800, 420),
+  scale(0.5),
   body(),
+  area(),
   "enemy"
 ]);
 
-onKeyDown("left", () => {
-  player.move(-600, 0);
+const player = add([
+  sprite("player"),
+  pos(280, 420),
+  scale(0.5),
+  area(),
+  body(),
+  "player"
+]);
+
+const speed = 200;
+keyDown("w", () => {
+  player.move(0, -speed);
 });
 
-onKeyDown("right", () => {
-  player.move(600, 0);
+keyDown("s", () => {
+  player.move(0, speed);
 });
 
-onKeyDown("up", () => {
-  player.move(0, -700);
+keyDown("a", () => {
+  player.move(-speed, 0);
+});
+
+keyDown("d", () => {
+  player.move(speed, 0);
 });
 
 
 
-onKeyDown("a", () => {
-  enemy.move(-600, 0);
+
+const playerPunchCooldown = 0.5;
+let playerCanPunch = true;
+
+keyPress("space", () => {
+  if (!playerCanPunch) {
+    return;
+  }
+  
+  playerCanPunch = false;
+  
+  const punch = add([
+    rect(20, 20),
+    pos(player.pos.x + player.width, player.pos.y + player.height / 3),
+    color(1, 1, 1),
+    lifespan(0.2),
+    move(speed * 2, 0),
+    area(),
+    "punch"
+  ]);
+  
+  punch.collides("enemy", () => {
+    playerHealth.value -= 10;
+    playerHealth.text = "Player Health: " + playerHealth.value;
+    if (playerHealth.value <= 0) {
+      go("gameOver", { winner: "Enemy" });
+    }
+  });
+  
+
+  
+  wait(playerPunchCooldown, () => {
+    playerCanPunch = true;
+  });
+  
+  // action("enemy", (enemy) => {
+  //   if (punch.collides("enemy")) {
+  //     enemyHealth.value -= 10;
+  //     enemyHealth.text = "Enemy Health: " + enemyHealth.value;
+  //     destroy(punch);
+  //     if (enemyHealth.value <= 0) {
+  //       go("gameOver", { winner: "Player" });
+  //     }
+  //   }
+  // });
 });
 
-onKeyDown("d", () => {
-  enemy.move(600, 0);
+keyDown("up", () => {
+  enemy.move(0, -speed);
 });
 
-onKeyDown("w", () => {
-  enemy.move(0, -700);
+keyDown("down", () => {
+  enemy.move(0, speed);
+});
+
+keyDown("left", () => {
+  enemy.move(-speed, 0);
+});
+
+keyDown("right", () => {
+  enemy.move(speed, 0);
+});
+
+
+const enemyPunchCooldown = 0.5;
+let enemyCanPunch = true;
+
+// keyPress("enter", () => {
+//   if (!enemyCanPunch) {
+//     return;
+//   }
+  
+//   enemyCanPunch = false;
+  
+//   let punch2 = add([
+//     rect(20, 20),
+//     pos(enemy.pos.x - 20, enemy.pos.y + enemy.height / 2 - 10),
+//     color(1, 1, 1),
+//     lifespan(0.2),
+//     move(-speed * 2, 0),
+//     "punch2"
+//   ]);
+  
+//   wait(enemyPunchCooldown, () => {
+//     enemyCanPunch = true;
+//   });
+  
+  // action("player", (player) => {
+  //   if (punch.collides("player")) {
+  //     playerHealth.value -= 10;
+  //     playerHealth.text = "Player Health: " + playerHealth.value;
+  //     destroy(punch);
+  //     if (playerHealth.value <= 0) {
+  //       go("gameOver", { winner: "Enemy" });
+  //     }
+  //   }
+  // });
+// });
+
+
+const playerHealth = add([
+  text("Player Health: 100"),
+  pos(20, 20),
+  layer("ui"),
+  scale(0.6),
+  {
+    value: 100
+  }
+]);
+
+const enemyHealth = add([
+  text("Enemy Health: 100"),
+  pos(780, 20),
+  layer("ui"),
+  scale(0.6),
+  {
+    value: 100
+  }
+]);
+
+
+// punch.collides("enemy", () => {
+//   playerHealth.value -= 10;
+//   playerHealth.text = "Player Health: " + playerHealth.value;
+//   if (playerHealth.value <= 0) {
+//     go("gameOver", { winner: "Enemy" });
+//   }
+// });
+
+// punch2.collides("player", () => {
+//   enemyHealth.value -= 10;
+//   enemyHealth.text = "Enemy Health: " + enemyHealth.value;
+//   if (enemyHealth.value <= 0) {
+//     go("gameOver", { winner: "Player" });
+//   }
+// });
+
+scene("gameOver", ({ winner }) => {
+  add([
+    text(`${winner} Wins!`),
+    pos(width() / 2, height() / 2),
+    origin("center"),
+    scale(1),
+    layer("ui")
+  ]);
+
+  keyPress("space", () => {
+    go("game");
+  });
 });

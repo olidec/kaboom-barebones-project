@@ -78,7 +78,7 @@ scene("game", () => {
     const dino = add([
       pos(width()/2-100,100),
       sprite("jnrDino"),
-      scale(0.18),
+      scale(0.24),
       area(),
       body(),
       "dino"
@@ -113,7 +113,7 @@ add([
         add([
             pos(width(),335),
             sprite("jnrObstacle"),
-            scale(0.033),
+            scale(6),
             area(),
             body(),
             "Object",

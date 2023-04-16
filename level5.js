@@ -1,205 +1,94 @@
 kaboom()
 
-loadSprite("player", "assets/sfPlayer.png");
-loadSprite("enemy", "assets/sfEnemy.png");
-loadSprite("sfbg", "assets/sfbg.jpg");
+loadSprite("earth", "assets/earth.png"),
+loadSprite("enemy", "assets/fireasteroid.png");
+loadSprite("enemy2", "assets/fireasteroid2.png");
+// loadSprite("space", "assets/space.png"),
 
-add([
-  sprite("sfbg", {width: width(), height: height()}),
-])
-
-add([
-  pos(0,560),
-  rect(width(),height()/5),
-  color(255,255,255,0.2),
-  area(),
-  solid(),
-])
-
-const enemy = add([
-  sprite("enemy"),
-  pos(800, 420),
-  scale(0.5),
-  body(),
-  area(),
-  "enemy"
-]);
-
-const player = add([
-  sprite("player"),
-  pos(280, 420),
-  scale(0.5),
-  area(),
-  body(),
-  "player"
-]);
-
-const speed = 200;
-keyDown("w", () => {
-  player.move(0, -speed);
-});
-
-keyDown("s", () => {
-  player.move(0, speed);
-});
-
-keyDown("a", () => {
-  player.move(-speed, 0);
-});
-
-keyDown("d", () => {
-  player.move(speed, 0);
-});
-
-
-
-
-const playerPunchCooldown = 0.5;
-let playerCanPunch = true;
-
-keyPress("space", () => {
-  if (!playerCanPunch) {
-    return;
-  }
-  
-  playerCanPunch = false;
-  
-  const punch = add([
-    rect(20, 20),
-    pos(player.pos.x + player.width, player.pos.y + player.height / 3),
-    color(1, 1, 1),
-    lifespan(0.2),
-    move(speed * 2, 0),
-    area(),
-    "punch"
-  ]);
-  
-  punch.collides("enemy", () => {
-    playerHealth.value -= 10;
-    playerHealth.text = "Player Health: " + playerHealth.value;
-    if (playerHealth.value <= 0) {
-      go("gameOver", { winner: "Enemy" });
-    }
-  });
-  
-
-  
-  wait(playerPunchCooldown, () => {
-    playerCanPunch = true;
-  });
-  
-  // action("enemy", (enemy) => {
-  //   if (punch.collides("enemy")) {
-  //     enemyHealth.value -= 10;
-  //     enemyHealth.text = "Enemy Health: " + enemyHealth.value;
-  //     destroy(punch);
-  //     if (enemyHealth.value <= 0) {
-  //       go("gameOver", { winner: "Player" });
-  //     }
-  //   }
-  // });
-});
-
-keyDown("up", () => {
-  enemy.move(0, -speed);
-});
-
-keyDown("down", () => {
-  enemy.move(0, speed);
-});
-
-keyDown("left", () => {
-  enemy.move(-speed, 0);
-});
-
-keyDown("right", () => {
-  enemy.move(speed, 0);
-});
-
-
-const enemyPunchCooldown = 0.5;
-let enemyCanPunch = true;
-
-// keyPress("enter", () => {
-//   if (!enemyCanPunch) {
-//     return;
-//   }
-  
-//   enemyCanPunch = false;
-  
-//   let punch2 = add([
-//     rect(20, 20),
-//     pos(enemy.pos.x - 20, enemy.pos.y + enemy.height / 2 - 10),
-//     color(1, 1, 1),
-//     lifespan(0.2),
-//     move(-speed * 2, 0),
-//     "punch2"
-//   ]);
-  
-//   wait(enemyPunchCooldown, () => {
-//     enemyCanPunch = true;
-//   });
-  
-  // action("player", (player) => {
-  //   if (punch.collides("player")) {
-  //     playerHealth.value -= 10;
-  //     playerHealth.text = "Player Health: " + playerHealth.value;
-  //     destroy(punch);
-  //     if (playerHealth.value <= 0) {
-  //       go("gameOver", { winner: "Enemy" });
-  //     }
-  //   }
-  // });
-// });
-
-
-const playerHealth = add([
-  text("Player Health: 100"),
-  pos(20, 20),
-  layer("ui"),
-  scale(0.6),
-  {
-    value: 100
-  }
-]);
-
-const enemyHealth = add([
-  text("Enemy Health: 100"),
-  pos(780, 20),
-  layer("ui"),
-  scale(0.6),
-  {
-    value: 100
-  }
-]);
-
-
-// punch.collides("enemy", () => {
-//   playerHealth.value -= 10;
-//   playerHealth.text = "Player Health: " + playerHealth.value;
-//   if (playerHealth.value <= 0) {
-//     go("gameOver", { winner: "Enemy" });
-//   }
-// });
-
-// punch2.collides("player", () => {
-//   enemyHealth.value -= 10;
-//   enemyHealth.text = "Enemy Health: " + enemyHealth.value;
-//   if (enemyHealth.value <= 0) {
-//     go("gameOver", { winner: "Player" });
-//   }
-// });
-
-scene("gameOver", ({ winner }) => {
+scene('game', () => {
   add([
-    text(`${winner} Wins!`),
-    pos(width() / 2, height() / 2),
-    origin("center"),
-    scale(1),
-    layer("ui")
-  ]);
+    rect(width(), height()),
+    color(0, 0, 0, 1),
+  ])
 
-  keyPress("space", () => {
-    go("game");
+  let enemySpeed = 100;
+
+  const earth = add([
+    sprite("earth"),
+    pos(500,200),
+    scale(0.15),
+    area(),
+  ])
+
+  function spawnEnemy() {
+    add([
+      sprite('enemy'),
+      pos(width() + 20, rand(0, height())),
+      origin('center'),
+      layer('obj'),
+      area(),
+      scale(0.1),
+      'enemy',
+    ]);
+
+    wait(rand(1, 6), spawnEnemy);
+  }
+
+  action('enemy', (e) => {
+    e.move(-enemySpeed, 0);
   });
+
+  spawnEnemy()
+
+  function spawnEnemy2() {
+    add([
+      sprite('enemy2'),
+      pos(0, rand(0, height())),
+      origin('center'),
+      layer('obj'),
+      scale(0.1),
+      area(),
+      'enemy2',
+    ]);
+
+    wait(rand(1, 7), spawnEnemy2);
+  }
+
+  action('enemy2', (e) => {
+    e.move(enemySpeed, 0);
+  });
+
+  spawnEnemy2()
+
+  onClick('enemy', (enemy) => {
+    destroy(enemy);
+  });
+
+  onClick('enemy2', (enemy2) => {
+    destroy(enemy2);
+  });
+
+  earth.collides("enemy", () => {
+    go('gameOver');
+  })
+
+  onCollide("earth","enemy", () => {
+    go("gameOver")
+  })
+})
+
+scene('gameOver', () => {
+  add([
+    rect(width(), height()),
+    color(0, 100, 0),
+  ])
+  add([
+    text('no more Dino', 32),
+    pos(center()),
+    origin('center'),
+    color(255, 0, 0),
+    
+  ]);
 });
+
+go('game')

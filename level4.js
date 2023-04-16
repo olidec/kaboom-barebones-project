@@ -1,134 +1,206 @@
-kaboom({
-    background: [202,225,255],
- })  
+kaboom()
 
-loadSprite("jnrDino", "assets/dino.png")
-loadSprite("jnrObstacle", "assets/obstacle.png")
-loadSound("dinoJump", "assets/dinoJump.mp3")
+loadSprite("player", "assets/sfPlayer.png");
+loadSprite("enemy", "assets/sfEnemy.png");
+loadSprite("sfbg", "assets/sfbg.jpg");
 
-//  {
-//   "jnrDino": {
-//     x: 0,
-//     y: 0,
-//     width: 520,
-//     height: 94,
-//     sliceX: 4,
-//     anims: {
-//       idle: { from: 0, to: 0},
-//       run: { from: 1, to: 3},
-//       dead: { from: 4, to: 5},
-//     }
-//   }
-// })
-
-
-
-
-
-let score = 0
-
-scene("gameover", () => {
-  add([
-    text("Game Over\n" + "Score:" + score),
-    pos(420,200),
-
-  ])
-
-onKeyPress("space", () => {
-    go("game")
-  })
-})
-
-
-const box = add([
-  rect(600, 300),
-  pos(350,150),
-  color(92,172,238),
-  z(2)
-]);
-
-const myText = add([
-  text("ohhhh, fun little easter egg!"),
-  pos(400,280),
-  scale(0.28),
-  color(255, 255, 255),
-  z(3)
-]);
-
-
-myText.text ="Press space bar to jump over obstacles!"
-
-
-
-onKeyPress("space", () => {
-destroy(myText);
-destroy(box);
-go('game');
-});
-
-
-scene("game", () => {
-
-  score = 0
-
-  const score_count = add([
-    text(score)
-  ])
-
-    const dino = add([
-      pos(width()/2-100,100),
-      sprite("jnrDino"),
-      scale(0.24),
-      area(),
-      body(),
-      "dino"
+add([
+  sprite("sfbg", {width: width(), height: height()}),
 ])
 
 add([
-  pos(0,399),
-  rect(width(),height()),
-  color(255,165,79),
+  pos(0,560),
+  rect(width(),height()/5),
+  color(255,255,255,0.2),
   area(),
   solid(),
 ])
+
+const enemy = add([
+  sprite("enemy"),
+  pos(800, 420),
+  scale(0.5),
+  body(),
+  area(),
+  "enemy"
+]);
+
+const player = add([
+  sprite("player"),
+  pos(280, 420),
+  scale(0.5),
+  area(),
+  body(),
+  "player"
+]);
+
+const speed = 300;
+keyDown("w", () => {
+  player.move(0, -speed*2.5);
+});
+keyDown("a", () => {
+  player.move(-speed, 0);
+});
+
+keyDown("d", () => {
+  player.move(speed, 0);
+});
+
+
+
+
+const playerPunchCooldown = 0.5;
+let playerCanPunch = true;
+
+keyPress("space", () => {
+  if (!playerCanPunch) {
+    return;
+  }
   
-  keyPress("space", () => {
-    if (dino.pos.y > 240)
-    dino.jump(750)
-    play("dinoJump")
-  })
+  playerCanPunch = false;
   
-  action("Object", (Object) =>{
-    if (Object.passed == false && Object.pos.x < dino.pos.x) {
-      Object.passed = true
-      score += 1
-      score_count.text = score
+  const punch = add([
+    rect(20, 20),
+    pos(player.pos.x + player.width, player.pos.y + player.height / 3),
+    color(255, 255, 255),
+    lifespan(0.2),
+    move(speed * 2, 0),
+    area(),
+    "punch"
+  ]);
+  
+  punch.collides("enemy", () => {
+    playerHealth.value -= 10;
+    playerHealth.text = "Player Health: " + playerHealth.value;
+    if (playerHealth.value <= 0) {
+      go("gameOver", { winner: "Enemy" });
     }
-    Object.move(-300, 0)
-  })
+  });
 
-  function addObs() {
-
-    loop(2,() => {
-        add([
-            pos(width(),335),
-            sprite("jnrObstacle"),
-            scale(6),
-            area(),
-            body(),
-            "Object",
-            { passed: false}
-            ])
-    })
-}
   
-onCollide("dino","Object", () => {
-  go("gameover")
-})
+  wait(playerPunchCooldown, () => {
+    playerCanPunch = true;
+  });
+  
 
-  addObs()
-})
+});
 
- 
+keyDown("up", () => {
+  enemy.move(0, -speed*2.5);
+});
 
-// go("game")
+keyDown("left", () => {
+  enemy.move(-speed, 0);
+});
+
+keyDown("right", () => {
+  enemy.move(speed, 0);
+});
+
+
+const enemyPunchCooldown = 0.5;
+let enemyCanPunch = true;
+
+keyPress("enter", () => {
+  if (!enemyCanPunch) {
+    return;
+  }
+  
+  enemyCanPunch = false;
+  
+  const punch2 = add([
+    rect(20, 20),
+    pos(enemy.pos.x - 150, enemy.pos.y + enemy.height / 3),
+    color(255, 255, 255),
+    lifespan(0.2),
+    move(-speed * 2, 0),
+    area(),
+    "punch2"
+  ]);
+
+  punch2.collides("player", () => {
+    enemyHealth.value -= 10;
+    enemyHealth.text = "Enemy Health: " + enemyHealth.value;
+    if (enemyHealth.value <= 0) {
+      go("gameOver", { winner: "Player" });
+    }
+  });
+  
+  wait(enemyPunchCooldown, () => {
+    enemyCanPunch = true;
+  });
+  
+});
+  // action("enemy", (enemy) => {
+  //   if (punch.collides("enemy")) {
+  //     enemyHealth.value -= 10;
+  //     enemyHealth.text = "Enemy Health: " + enemyHealth.value;
+  //     destroy(punch);
+  //     if (enemyHealth.value <= 0) {
+  //       go("gameOver", { winner: "Player" });
+  //     }
+  //   }
+  // });
+  // action("player", (player) => {
+  //   if (punch.collides("player")) {
+  //     playerHealth.value -= 10;
+  //     playerHealth.text = "Player Health: " + playerHealth.value;
+  //     destroy(punch);
+  //     if (playerHealth.value <= 0) {
+  //       go("gameOver", { winner: "Enemy" });
+  //     }
+  //   }
+  // });
+// });
+
+
+const playerHealth = add([
+  text("Player Health: 100"),
+  pos(20, 20),
+  layer("ui"),
+  scale(0.6),
+  {
+    value: 100
+  }
+]);
+
+const enemyHealth = add([
+  text("Enemy Health: 100"),
+  pos(780, 20),
+  layer("ui"),
+  scale(0.6),
+  {
+    value: 100
+  }
+]);
+
+
+// punch.collides("enemy", () => {
+//   playerHealth.value -= 10;
+//   playerHealth.text = "Player Health: " + playerHealth.value;
+//   if (playerHealth.value <= 0) {
+//     go("gameOver", { winner: "Enemy" });
+//   }
+// });
+
+// punch2.collides("player", () => {
+//   enemyHealth.value -= 10;
+//   enemyHealth.text = "Enemy Health: " + enemyHealth.value;
+//   if (enemyHealth.value <= 0) {
+//     go("gameOver", { winner: "Player" });
+//   }
+// });
+
+scene("gameOver", ({ winner }) => {
+  add([
+    text(`${winner} Wins!`),
+    pos(width() / 2, height() / 2),
+    origin("center"),
+    scale(1),
+    layer("ui")
+  ]);
+
+  keyPress("space", () => {
+    go("game");
+  });
+});

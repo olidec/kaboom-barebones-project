@@ -132,7 +132,7 @@ onKeyPress("space", () => {
       sprite("eggDino"),
       pos(center()),
       scale(0.5),
-      pos(500,300),
+      pos(550,330),
       "eggDino",
       play("crack")
     ]);

@@ -4,7 +4,43 @@ loadSprite("player", "assets/sfPlayer.png");
 loadSprite("enemy", "assets/sfEnemy.png");
 loadSprite("sfbg", "assets/sfbg.jpg");
 
-add([
+
+
+
+const box = add([
+  rect(700, 400),
+  pos(300,100),
+  color(100,70,10),
+  z(2)
+]);
+
+const myText = add([
+  text("Player 1:\n\nuse 'w' 'a' 'd' to move and press space bar to punch\n\n\n\n\nPlayer 2:\n\nuse the arrow keys to move and press 'enter' to punch"),
+  pos(330,200),
+  scale(0.26),
+  color(255, 255, 255),
+  z(3)
+]);
+
+loadSprite("bg", "assets/bg.jpg");
+onKeyPress("space", () => {
+destroy(myText);
+destroy(box);
+go('game');
+});
+
+add([rect(width(), height()), color(98, 60, 30, 0.877)]);
+
+loadSprite("bg", "assets/bg.jpg");
+
+onKeyPress("space", () => {
+destroy(myText);
+destroy(box);
+go('game');
+});
+
+scene('game', () => {
+  add([
   sprite("sfbg", {width: width(), height: height()}),
 ])
 
@@ -15,8 +51,7 @@ add([
   area(),
   solid(),
 ])
-
-const enemy = add([
+  const enemy = add([
   sprite("enemy"),
   pos(800, 420),
   scale(0.5),
@@ -152,6 +187,9 @@ const enemyHealth = add([
     value: 100
   }
 ]);
+})
+
+
 
 scene("gameOver", ({ winner }) => {
   add([
@@ -159,8 +197,9 @@ scene("gameOver", ({ winner }) => {
     pos(width() / 2, height() / 2),
     origin("center"),
     scale(1),
-    layer("ui")
+    z("33"),
   ]);
+  add([rect(width(), height()), color(98, 60, 30, 0.877)]);
   const link = add([
     text("Return to Home"),
     pos(width() / 2, height() / 1.5),

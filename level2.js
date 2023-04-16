@@ -47,7 +47,7 @@ scene('game', () => {
  let dino = add([
   sprite("dino"),
   pos(width() / 2, height() / 1.41),
-  scale(0.24),
+  scale(0.33),
   area(),
   "dino"
 ]);
@@ -65,14 +65,6 @@ onKeyDown("left", () => {
 onKeyDown("right", () => {
   dino.move(600, 0);
 });
-
-// onKeyDown("up", () => {
-//   dino.move(0, -200);
-// });
-
-// onKeyDown("down", () => {
-//   dino.move(0, 200);
-// });
 
 function addNuggets() {
   const dino = get('dino')[0];

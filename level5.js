@@ -4,6 +4,32 @@ loadSprite("earth", "assets/earth.png"),
 loadSprite("enemy", "assets/fireasteroid.png");
 loadSprite("enemy2", "assets/fireasteroid2.png");
 // loadSprite("space", "assets/space.png"),
+add([rect(width(), height()), color(0, 0, 0, 0.877)])
+
+
+const box = add([
+  rect(600, 300),
+  pos(350,150),
+  color(50, 50, 50),
+  z(2)
+]);
+
+const myText = add([
+  text("Save the dino population by clicking the asteroids!"),
+  pos(375,280),
+  scale(0.24),
+  color(255, 255, 255),
+  z(3)
+]);
+
+loadSprite("bg", "assets/bg.jpg");
+
+
+onKeyPress("space", () => {
+  destroy(myText);
+  destroy(box);
+  go('game')
+});
 
 scene('game', () => {
   add([
@@ -15,8 +41,8 @@ scene('game', () => {
 
   const earth = add([
     sprite("earth"),
-    pos(500,200),
-    scale(0.15),
+    pos(500,181),
+    scale(0.24),
     area(),
   ])
 
@@ -72,23 +98,21 @@ scene('game', () => {
     go('gameOver');
   })
 
-  onCollide("earth","enemy", () => {
-    go("gameOver")
+  earth.collides("enemy2", () => {
+    go('gameOver');
   })
 })
 
 scene('gameOver', () => {
   add([
     rect(width(), height()),
-    color(0, 100, 0),
+    color(0, 0, 0),
   ])
   add([
-    text('no more Dino', 32),
+    text('no more Dinos', 32),
     pos(center()),
     origin('center'),
-    color(255, 0, 0),
+    color(60, 60, 50),
     
   ]);
 });
-
-go('game')

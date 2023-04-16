@@ -6,61 +6,126 @@
         background-image: url("assets/homebg.png");
         background-size: cover;
     }
+
+		#image-container {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+		}
+
+		#image-container img {
+			display: block;
+			margin: auto;
+			max-width: 100%;
+			max-height: 100%;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: black;
+			opacity: 0.8;
+			z-index: 9998;
+		}
+
+		.hidden {
+			display: none;
+		}
+        #text-box {
+  position: fixed;
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 70%;
+  padding: 20px;
+  background-color: rgba(98, 160, 83, 0.877);
+  font-size: 16px;
+  text-align: justify;
+  z-index: 9998;
+}
+/* #credits-container {
+  position: fixed;
+  top: 10%;
+  right: 1%;
+  text-align: center;
+  width: 6%;
+  height: 3%;
+  padding: 50px;
+  background-color: rgba(98, 160, 83, 0.877);
+  font-size: 16px;
+  text-align: justify;
+  z-index: 9998;
+} */
+#credits {
+    position: absolute;
+        top: 6%;
+        left: 90%; 
+        width: 6%;
+        height: 1%;
+        /* transform: translate(-50%, -50%); */
+        text-decoration: none;
+		padding: 20px;
+        background-color: rgba(98, 160, 83, 0.877);
+        z-index: 99999;
+}
 	#level1 {
         position: absolute;
         top: 10%;
-        left: 75%; /* change this value to move the link farther to the right */
+        left: 75%; 
         transform: translate(-50%, -50%);
         text-decoration: none;
 		opacity: 0;
 		padding: 50px;
+        z-index: 999999;
     }
 	#level2 {
         position: absolute;
         top: 82%;
-        left: 70%; /* change this value to move the link farther to the right */
+        left: 70%; 
         transform: translate(-50%, -50%);
         text-decoration: none;
 		opacity: 0;
 		padding: 50px;
+        z-index: 99999;
     }
 	#level3 {
         position: absolute;
         top: 90%;
-        left: 42%; /* change this value to move the link farther to the right */
+        left: 42%; 
         transform: translate(-50%, -50%);
         text-decoration: none;
 		opacity: 0;
 		padding: 50px;
+        z-index: 99999;
     }
 	#level4 {
         position: absolute;
         top: 60%;
-        left: 24%; /* change this value to move the link farther to the right */
+        left: 24%; 
         transform: translate(-50%, -50%);
         text-decoration: none;
 		opacity: 0;
 		padding: 50px;
-		
-    }
-	#level4 {
-        position: absolute;
-        top: 60%;
-        left: 24%; /* change this value to move the link farther to the right */
-        transform: translate(-50%, -50%);
-        text-decoration: none;
-		opacity: 0;
-		padding: 50px;
+        z-index: 99999;
 		
     }
 	#level5 {
         position: absolute;
         top: 17%;
-        left: 42%; /* change this value to move the link farther to the right */
+        left: 42%; 
         transform: translate(-50%, -50%);
         text-decoration: none;
 		opacity: 0;
 		padding: 50px;
+        z-index: 99999;
     }
 	</style>
 	<title>Dino Game</title>
@@ -72,16 +137,41 @@
 	<title>Document</title>
 </head>
 <body>
+    <div id="image-container">
+		<img src="assets/PangeaTitleImage.png" alt="Image">
+	</div>
+    <div id="text-box">
+        <p>This collection of mini-games invites you to follow along as a solitary dino figures out life and beats various challanges along the way.</p>
+      </div>
+      <!-- <div id="credits-container"> -->
+        <!-- <a href="credits.html" id="credits-link">Credits</a> -->
+      <!-- </div> -->
+	<script>
+		document.addEventListener("keydown", function(event) {
+			if (event.keyCode === 32) {
+				document.getElementById("image-container").classList.add("hidden");
+                document.getElementById("credits-container").classList.add("hidden");
+				document.body.style.overflow = "";
+				document.body.style.setProperty("opacity", "0");
+                document.getElementById("text-box").classList.add("hidden");
+			}
+		});
+
+		// document.body.style.overflow = "hidden";
+		// document.body.insertBefore(document.createElement("div"), document.body.firstChild);
+	</script>
 	<script src="level1.js"></script>
 	<script src="level2.js"></script>
 	<script src="level3.js"></script>
 	<script src="level4.js"></script>
-	<!-- <script src="level5.js"></script> -->
+	<script src="level5.js"></script>
+    <script src="credits.js"></script>
 	<a href="level1.html" id="level1">/</a><br>
 	<a href="level2.html" id="level2" type="text/javascript">Level 2</a><br>
 	<a href="level3.html" id="level3" type="text/javascript">Level 3</a><br>
 	<a href="level4.html" id="level4" type="text/javascript">Level 4</a><br>
 	<a href="level5.html" id="level5" type="text/javascript">Level 5</a><br>
+    <a href="credits.js" id="credits" type="text/javascript">credits</a><br>
 
 </body>
 </html>

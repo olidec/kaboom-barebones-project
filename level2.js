@@ -121,6 +121,20 @@ function addNuggets() {
       color(255, 0, 0),
       
     ]);
+    const link = add([
+      text("Return to Home"),
+      pos(width() / 2, height() / 1.5),
+      origin("center"),
+      color(255, 255, 255),
+      scale(0.6),
+      z(777),
+      area({ cursor: "pointer", }),
+    ]);
+    
+    
+    link.clicks(() => {
+      window.open("home2.html", "_blank");
+    });
   });
 }
 
@@ -136,6 +150,20 @@ scene('endScreen', () => {
     color(255, 182, 193),
     
   ]);
+  const link = add([
+    text("Return to Home"),
+    pos(width() / 2, height() / 1.5),
+    origin("center"),
+    color(255, 255, 255),
+    scale(0.6),
+    z(777),
+    area({ cursor: "pointer", }),
+  ]);
+  
+  
+  link.clicks(() => {
+    window.open("home3.html", "_blank");
+  });
 });
 
 

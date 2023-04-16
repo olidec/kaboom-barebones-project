@@ -131,27 +131,6 @@ keyPress("enter", () => {
   });
   
 });
-  // action("enemy", (enemy) => {
-  //   if (punch.collides("enemy")) {
-  //     enemyHealth.value -= 10;
-  //     enemyHealth.text = "Enemy Health: " + enemyHealth.value;
-  //     destroy(punch);
-  //     if (enemyHealth.value <= 0) {
-  //       go("gameOver", { winner: "Player" });
-  //     }
-  //   }
-  // });
-  // action("player", (player) => {
-  //   if (punch.collides("player")) {
-  //     playerHealth.value -= 10;
-  //     playerHealth.text = "Player Health: " + playerHealth.value;
-  //     destroy(punch);
-  //     if (playerHealth.value <= 0) {
-  //       go("gameOver", { winner: "Enemy" });
-  //     }
-  //   }
-  // });
-// });
 
 
 const playerHealth = add([
@@ -174,23 +153,6 @@ const enemyHealth = add([
   }
 ]);
 
-
-// punch.collides("enemy", () => {
-//   playerHealth.value -= 10;
-//   playerHealth.text = "Player Health: " + playerHealth.value;
-//   if (playerHealth.value <= 0) {
-//     go("gameOver", { winner: "Enemy" });
-//   }
-// });
-
-// punch2.collides("player", () => {
-//   enemyHealth.value -= 10;
-//   enemyHealth.text = "Enemy Health: " + enemyHealth.value;
-//   if (enemyHealth.value <= 0) {
-//     go("gameOver", { winner: "Player" });
-//   }
-// });
-
 scene("gameOver", ({ winner }) => {
   add([
     text(`${winner} Wins!`),
@@ -199,7 +161,20 @@ scene("gameOver", ({ winner }) => {
     scale(1),
     layer("ui")
   ]);
-
+  const link = add([
+    text("Return to Home"),
+    pos(width() / 2, height() / 1.5),
+    origin("center"),
+    color(255, 255, 255),
+    scale(0.6),
+    z(777),
+    area({ cursor: "pointer", }),
+  ]);
+  
+  
+  link.clicks(() => {
+    window.open("home5.html", "_blank");
+  });
   keyPress("space", () => {
     go("game");
   });

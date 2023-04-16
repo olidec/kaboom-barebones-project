@@ -15,6 +15,20 @@ scene("gameover", () => {
     pos(420,200),
 
   ])
+  const link = add([
+    text("Return to Home"),
+    pos(width() / 2, height() / 1.5),
+    origin("center"),
+    color(255, 255, 255),
+    scale(0.33),
+    z(777),
+    area({ cursor: "pointer", }),
+  ]);
+  
+  
+  link.clicks(() => {
+    window.open("home4.html", "_blank");
+  });
 
 onKeyPress("space", () => {
     go("game")

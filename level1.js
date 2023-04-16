@@ -10,13 +10,6 @@ add([
   z(-2),
 ]);
 
-// add([
-//   sprite("bean"),          
-//   pos(center()),
-//   "bean",
-//   z(1)
-// ]);
-
 const box = add([
   rect(600, 300),
   pos(350,150),
@@ -139,7 +132,7 @@ onKeyPress("space", () => {
       sprite("eggDino"),
       pos(center()),
       scale(0.5),
-      pos(400,280),
+      pos(500,300),
       "eggDino",
       play("crack")
     ]);
@@ -169,6 +162,28 @@ onKeyPress("space", () => {
     const name = nameInput.value;
     console.log("The player's name is: ", name);
     document.body.removeChild(dialogBox);
+    const box = add([
+      rect(600, 300),
+      pos(350,150),
+      color(0,100,0),
+      z(2)
+    ]);
+
+    const link = add([
+      text("Return to Home"),
+      pos(width() / 2, height() / 2),
+      origin("center"),
+      color(255, 255, 255),
+      scale(0.6),
+      z(777),
+      area({ cursor: "pointer", }),
+    ]);
+    
+    
+    link.clicks(() => {
+      window.open("home2.html", "_blank");
+    });
+    
   });
   }
 

@@ -37,7 +37,7 @@ scene('game', () => {
     color(0, 0, 0, 1),
   ])
 
-  let enemySpeed = 100;
+  let enemySpeed = 120;
 
   const earth = add([
     sprite("earth"),

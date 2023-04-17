@@ -52,7 +52,6 @@ scene('game', () => {
     "earth", 
   ]);
   action("earth", () => {
-
     earth.angle += 1;
   });
 

@@ -23,7 +23,7 @@ loadSound("jazz", "assets/jazz.mp3");
   ]);
   
   const myText = add([
-    text("ohhhh, fun little easter egg!"),
+    text("oooooo funny little lad"),
     pos(400,280),
     scale(0.24),
     color(255, 255, 255),
@@ -61,11 +61,11 @@ add([
 ]);
 
 onKeyDown("left", () => {
-  dino.move(-600, 0);
+  dino.move(-700, 0);
 });
 
 onKeyDown("right", () => {
-  dino.move(600, 0);
+  dino.move(700, 0);
 });
 
 function addNuggets() {
@@ -176,130 +176,3 @@ add([
   },
 ]);
 });
-
-
-
-
-
-
-// let randomNugget1 = choose(["nugget1","nugget2","nugget3","burntNugget1","burntNugget2","burntNugget3"])
-// let randomNugget2 = choose(["nugget1","nugget2","nugget3","burntNugget1","burntNugget2","burntNugget3"])
-// let randomNugget3 = choose(["nugget1","nugget2","nugget3","burntNugget1","burntNugget2","burntNugget3"])
-// let randomNugget5 = choose(["nugget1","nugget2","nugget3"])
-// let randomNugget6 = choose(["nugget1","nugget2","nugget3"])
-
-
-
-
-
-
-
-// function addNuggets() {
-//   loop(1, () => {
-//     const nugget = add([
-//       sprite(randomNugget1),
-//       pos(rand(vec2(width(), 10))),
-//       scale(0.15),
-//       area(),
-//       solid(),
-//       body(),
-//       "randomNugget1",
-//     ]);
-
-//     nugget.onCollide("dino", () => {
-//       nugget.destroy();
-//     });
-//   });
-// }
-
-
-// function addMoreNuggets1() {
-//   loop(1.5, () => {
-//     const nugget2 = add([
-//       sprite(randomNugget2),
-//       pos(rand(vec2(width(), 10))),
-//       scale(0.15),
-//       area(),
-//       solid(),
-//       body(),
-//       "randomNugget2",
-//     ]);
-
-//     nugget2.onCollide("dino", () => {
-//       nugget2.destroy();
-//     });
-//   });
-// }
-
-
-// function addMoreNuggets2() {
-//   loop(1, () => {
-//     const nugget3 = add([
-//       sprite(randomNugget3),
-//       pos(rand(vec2(width(), 10))),
-//       scale(0.15),
-//       area(),
-//       solid(),
-//       body(),
-//       "randomNugget3",
-//     ]);
-
-//     nugget3.onCollide("dino", () => {
-//       nugget3.destroy();
-//     });
-//   });
-// }
-
-// function addMoreNuggets3() {
-//   loop(1.5, () => {
-//     const nugget5 = add([
-//       sprite(randomNugget5),
-//       pos(rand(vec2(width(), 10))),
-//       scale(0.15),
-//       area(),
-//       solid(),
-//       body(),
-//       "randomNugget5",
-//     ]);
-
-//     nugget5.onCollide("dino", () => {
-//       nugget5.destroy();
-//     });
-//   });
-// }
-
-// function thereHasToBeABetterWayToDoThis() {
-//   loop(1.8, () => {
-//     const nugget6 = add([
-//       sprite(randomNugget6),
-//       pos(rand(vec2(width(), 10))),
-//       scale(0.15),
-//       area(),
-//       solid(),
-//       body(),
-//       "randomNugget6",
-//     ]);
-
-//     nugget6.onCollide("dino", () => {
-//       nugget6.destroy();
-//     });
-//   });
-// }
-
-// addNuggets()
-// addMoreNuggets1()
-// addMoreNuggets2()
-// addMoreNuggets3()
-// thereHasToBeABetterWayToDoThis()
-
-
-
-
-// action("Object", (Object) =>{
-//   if (Object.passed == false && Object.pos.y < dino.pos.y) {
-//     Object.passed = true
-//     score += 1
-//     score_count.text = score
-//   }
-//   Object.move(-250, 0)
-// })

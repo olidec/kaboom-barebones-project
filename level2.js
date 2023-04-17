@@ -8,6 +8,7 @@ loadSprite("nugget3", "assets/nugget3.png");
 loadSprite("burntNugget1", "assets/burntNugget1.png");
 loadSprite("burntNugget2", "assets/burntNugget2.png");
 loadSprite("burntNugget3", "assets/burntNugget3.png");
+loadSound("jazz", "assets/jazz.mp3");
 
    add([
     sprite("bg2", {width: width(), height: height()}),
@@ -52,6 +53,7 @@ scene('game', () => {
   "dino"
 ]);
 
+play("jazz");
 
 add([
   sprite("bg2", {width: width(), height: height()}),

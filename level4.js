@@ -3,14 +3,14 @@ kaboom()
 loadSprite("player", "assets/sfPlayer.png");
 loadSprite("enemy", "assets/sfEnemy.png");
 loadSprite("sfbg", "assets/sfbg.jpg");
-
+loadSound("jazz", "assets/jazz.mp3");
 
 
 
 const box = add([
   rect(700, 400),
   pos(300,100),
-  color(100,70,10),
+  color(123,71,60),
   z(2)
 ]);
 
@@ -29,7 +29,7 @@ destroy(box);
 go('game');
 });
 
-add([rect(width(), height()), color(98, 60, 30, 0.877)]);
+add([rect(width(), height()), color(123, 51, 51, 0.877)]);
 
 loadSprite("bg", "assets/bg.jpg");
 
@@ -43,6 +43,8 @@ scene('game', () => {
   add([
   sprite("sfbg", {width: width(), height: height()}),
 ])
+
+play("jazz");
 
 add([
   pos(0,560),
@@ -96,7 +98,7 @@ keyPress("space", () => {
   
   const punch = add([
     rect(20, 20),
-    pos(player.pos.x + player.width, player.pos.y + player.height / 3),
+    pos(player.pos.x -120 + player.width, player.pos.y + player.height / 3),
     color(255, 255, 255),
     lifespan(0.2),
     move(speed * 2, 0),
@@ -105,10 +107,10 @@ keyPress("space", () => {
   ]);
   
   punch.collides("enemy", () => {
-    playerHealth.value -= 10;
-    playerHealth.text = "Player Health: " + playerHealth.value;
-    if (playerHealth.value <= 0) {
-      go("gameOver", { winner: "Enemy" });
+    enemyHealth.value -= 10;
+    enemyHealth.text = "Player 2 Health: " + enemyHealth.value;
+    if (enemyHealth.value <= 0) {
+      go("gameOver", { winner: "Player 1" });
     }
   });
 
@@ -145,7 +147,7 @@ keyPress("enter", () => {
   
   const punch2 = add([
     rect(20, 20),
-    pos(enemy.pos.x - 150, enemy.pos.y + enemy.height / 3),
+    pos(enemy.pos.x - 100, enemy.pos.y + enemy.height / 3),
     color(255, 255, 255),
     lifespan(0.2),
     move(-speed * 2, 0),
@@ -154,10 +156,10 @@ keyPress("enter", () => {
   ]);
 
   punch2.collides("player", () => {
-    enemyHealth.value -= 10;
-    enemyHealth.text = "Enemy Health: " + enemyHealth.value;
-    if (enemyHealth.value <= 0) {
-      go("gameOver", { winner: "Player" });
+    playerHealth.value -= 10;
+    playerHealth.text = "Player 1 Health: " + playerHealth.value;
+    if (playerHealth.value <= 0) {
+      go("gameOver", { winner: "Player 2" });
     }
   });
   
@@ -169,20 +171,20 @@ keyPress("enter", () => {
 
 
 const playerHealth = add([
-  text("Player Health: 100"),
+  text("Player 1 Health: 100"),
   pos(20, 20),
   layer("ui"),
-  scale(0.6),
+  scale(0.5),
   {
     value: 100
   }
 ]);
 
 const enemyHealth = add([
-  text("Enemy Health: 100"),
+  text("Player 2 Health: 100"),
   pos(780, 20),
   layer("ui"),
-  scale(0.6),
+  scale(0.5),
   {
     value: 100
   }

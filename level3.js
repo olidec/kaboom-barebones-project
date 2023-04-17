@@ -2,9 +2,12 @@ kaboom({
     background: [202,222,180],
  })  
 
-loadSprite("jnrDino", "assets/dino.png")
 loadSprite("jnrObstacle", "assets/obstacle.png")
 loadSound("dinoJump", "assets/dinoJump.mp3")
+const sprite1 = loadSprite("jnrDino", "assets/dino.png")
+const sprite2 = loadSprite("jnrDino2","assets/jnrDino2.png");
+const sprite3 = loadSprite("jnrDino3","assets/jnrDino3.png");
+
 
 
 let score = 0
@@ -79,6 +82,14 @@ scene("game", () => {
       body(),
       "dino"
 ])
+const frames = ["jnrDino", "jnrDino3","jnrDino2"];
+
+loop(0.25, () => {
+  const frame = frames.shift();
+  frames.push(frame);
+  dino.use(sprite(frame));
+});
+
 
 add([
   pos(0,399),

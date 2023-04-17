@@ -19,8 +19,8 @@ const box = add([
 
 const myText = add([
   text("ohhhh, fun little easter egg!"),
-  pos(400,280),
-  scale(0.24),
+  pos(370,280),
+  scale(0.28),
   color(255, 255, 255),
   z(3)
 ]);

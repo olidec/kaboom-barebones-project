@@ -115,4 +115,32 @@ scene('gameOver', () => {
     color(60, 60, 50),
     
   ]);
+  const link = add([
+    text("Return to Home"),
+    pos(width() / 2, height() / 1.5),
+    origin("center"),
+    color(255, 255, 255),
+    scale(0.6),
+    z(777),
+    area({ cursor: "pointer", }),
+  ]);
+  
+  
+  link.clicks(() => {
+    window.open("home5.html", "_blank");
+  });
+  const link2 = add([
+    text("credits"),
+    pos(width() / 1.11, height() / 6),
+    origin("center"),
+    color(255, 255, 255),
+    scale(0.24),
+    z(777),
+    area({ cursor: "pointer", }),
+  ]);
+  
+  
+  link2.clicks(() => {
+    window.open("credits.html", "_blank");
+  });
 });

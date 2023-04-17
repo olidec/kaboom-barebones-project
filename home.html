@@ -51,19 +51,6 @@
   text-align: justify;
   z-index: 9998;
 }
-/* #credits-container {
-  position: fixed;
-  top: 10%;
-  right: 1%;
-  text-align: center;
-  width: 6%;
-  height: 3%;
-  padding: 50px;
-  background-color: rgba(98, 160, 83, 0.877);
-  font-size: 16px;
-  text-align: justify;
-  z-index: 9998;
-} */
 #credits {
     position: absolute;
         top: 6%;
@@ -102,6 +89,9 @@
     <div id="text-box">
         <p>This collection of mini-games invites you to follow along as a solitary dino figures out life and beats various challanges along the way.</p>
       </div>
+       <script>
+
+    </script>
 	<script>
 		document.addEventListener("keydown", function(event) {
 			if (event.keyCode === 32) {
@@ -115,6 +105,7 @@
 
 
 	</script>
+   
 	<script src="level1.js"></script>
 	<script src="level2.js"></script>
 	<script src="level3.js"></script>
@@ -122,11 +113,10 @@
 	<script src="level5.js"></script>
     <script src="credits.js"></script>
 	<a href="level1.html" id="level1">/</a><br>
-	<a href="level2.html" id="level2" type="text/javascript">Level 2</a><br>
-	<a href="level3.html" id="level3" type="text/javascript">Level 3</a><br>
-	<a href="level4.html" id="level4" type="text/javascript">Level 4</a><br>
-	<a href="level5.html" id="level5" type="text/javascript">Level 5</a><br>
     <a href="credits.html" id="credits" type="text/javascript">credits</a><br>
-
+    <canvas id="canvas" width="96" height="132"></canvas>
+    <!-- <div style="display:none;">
+        <img id="character" src="chars.png" width="96" height="132" />
+    </div> -->
 </body>
 </html>

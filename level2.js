@@ -22,7 +22,7 @@ loadSprite("burntNugget3", "assets/burntNugget3.png");
   ]);
   
   const myText = add([
-    text("ohhhh, fun little easter egg!"),
+    text("oooooo funny little lad"),
     pos(400,280),
     scale(0.24),
     color(255, 255, 255),
@@ -59,11 +59,11 @@ add([
 ]);
 
 onKeyDown("left", () => {
-  dino.move(-600, 0);
+  dino.move(-700, 0);
 });
 
 onKeyDown("right", () => {
-  dino.move(600, 0);
+  dino.move(700, 0);
 });
 
 function addNuggets() {

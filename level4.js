@@ -145,7 +145,7 @@ keyPress("enter", () => {
   
   const punch2 = add([
     rect(20, 20),
-    pos(enemy.pos.x - 100, enemy.pos.y + enemy.height / 3),
+    pos(enemy.pos.x - 111, enemy.pos.y + enemy.height / 3),
     color(255, 255, 255),
     lifespan(0.2),
     move(-speed * 2, 0),

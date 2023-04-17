@@ -10,7 +10,7 @@ loadSprite("sfbg", "assets/sfbg.jpg");
 const box = add([
   rect(700, 400),
   pos(300,100),
-  color(100,70,10),
+  color(123,71,60),
   z(2)
 ]);
 
@@ -29,7 +29,7 @@ destroy(box);
 go('game');
 });
 
-add([rect(width(), height()), color(98, 60, 30, 0.877)]);
+add([rect(width(), height()), color(123, 51, 51, 0.877)]);
 
 loadSprite("bg", "assets/bg.jpg");
 
@@ -96,7 +96,7 @@ keyPress("space", () => {
   
   const punch = add([
     rect(20, 20),
-    pos(player.pos.x + player.width, player.pos.y + player.height / 3),
+    pos(player.pos.x -120 + player.width, player.pos.y + player.height / 3),
     color(255, 255, 255),
     lifespan(0.2),
     move(speed * 2, 0),
@@ -145,7 +145,7 @@ keyPress("enter", () => {
   
   const punch2 = add([
     rect(20, 20),
-    pos(enemy.pos.x - 150, enemy.pos.y + enemy.height / 3),
+    pos(enemy.pos.x - 100, enemy.pos.y + enemy.height / 3),
     color(255, 255, 255),
     lifespan(0.2),
     move(-speed * 2, 0),

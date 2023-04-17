@@ -6,7 +6,10 @@
         background-image: url("assets/homebg.png");
         background-size: cover;
     }
-
+    audio {
+      position: absolute;
+      left: -9999px;
+    }
 		#image-container {
 			position: fixed;
 			top: 0;
@@ -83,6 +86,10 @@
 	<title>Document</title>
 </head>
 <body>
+    <audio controls autoplay loop preload="auto">
+        <source src="assets/jazz.mp3" type="audio/mpeg">
+
+      </audio>
     <div id="image-container">
 		<img src="assets/PangeaTitleImage.png" alt="Image">
 	</div>
@@ -115,6 +122,6 @@
 	<a href="level1.html" id="level1">/</a><br>
     <a href="credits.html" id="credits" type="text/javascript">credits</a><br>
     <canvas id="canvas" width="96" height="132"></canvas>
-   
+
 </body>
 </html>

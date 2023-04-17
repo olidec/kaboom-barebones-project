@@ -44,8 +44,9 @@ loadSprite("egg4", "assets/egg4.png");
 loadSprite("egg5", "assets/egg5.png");
 loadSprite("egg6", "assets/egg6.png");
 loadSprite("eggDino", "assets/eggDino.png");
+loadSound("jazz", "assets/jazz.mp3");
 
-
+play("jazz");
 
 let counter = 0;
 

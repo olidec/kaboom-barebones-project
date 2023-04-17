@@ -7,6 +7,7 @@ loadSound("dinoJump", "assets/dinoJump.mp3")
 const sprite1 = loadSprite("jnrDino", "assets/dino.png")
 const sprite2 = loadSprite("jnrDino2","assets/jnrDino2.png");
 const sprite3 = loadSprite("jnrDino3","assets/jnrDino3.png");
+loadSound("jazz", "assets/jazz.mp3");
 
 
 
@@ -38,6 +39,7 @@ onKeyPress("space", () => {
   })
 })
 
+play("jazz");
 
 const box = add([
   rect(600, 300),

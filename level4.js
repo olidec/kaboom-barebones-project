@@ -3,7 +3,7 @@ kaboom()
 loadSprite("player", "assets/sfPlayer.png");
 loadSprite("enemy", "assets/sfEnemy.png");
 loadSprite("sfbg", "assets/sfbg.jpg");
-
+loadSound("jazz", "assets/jazz.mp3");
 
 
 
@@ -43,6 +43,8 @@ scene('game', () => {
   add([
   sprite("sfbg", {width: width(), height: height()}),
 ])
+
+play("jazz");
 
 add([
   pos(0,560),
@@ -105,10 +107,10 @@ keyPress("space", () => {
   ]);
   
   punch.collides("enemy", () => {
-    playerHealth.value -= 10;
-    playerHealth.text = "Player Health: " + playerHealth.value;
-    if (playerHealth.value <= 0) {
-      go("gameOver", { winner: "Enemy" });
+    enemyHealth.value -= 10;
+    enemyHealth.text = "Player 2 Health: " + enemyHealth.value;
+    if (enemyHealth.value <= 0) {
+      go("gameOver", { winner: "Player 1" });
     }
   });
 
@@ -154,10 +156,10 @@ keyPress("enter", () => {
   ]);
 
   punch2.collides("player", () => {
-    enemyHealth.value -= 10;
-    enemyHealth.text = "Enemy Health: " + enemyHealth.value;
-    if (enemyHealth.value <= 0) {
-      go("gameOver", { winner: "Player" });
+    playerHealth.value -= 10;
+    playerHealth.text = "Player 1 Health: " + playerHealth.value;
+    if (playerHealth.value <= 0) {
+      go("gameOver", { winner: "Player 2" });
     }
   });
   
@@ -169,20 +171,20 @@ keyPress("enter", () => {
 
 
 const playerHealth = add([
-  text("Player Health: 100"),
+  text("Player 1 Health: 100"),
   pos(20, 20),
   layer("ui"),
-  scale(0.6),
+  scale(0.5),
   {
     value: 100
   }
 ]);
 
 const enemyHealth = add([
-  text("Enemy Health: 100"),
+  text("Player 2 Health: 100"),
   pos(780, 20),
   layer("ui"),
-  scale(0.6),
+  scale(0.5),
   {
     value: 100
   }

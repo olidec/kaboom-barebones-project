@@ -3,9 +3,11 @@ kaboom()
 loadSprite("earth", "assets/earth.png"),
 loadSprite("enemy", "assets/fireasteroid.png");
 loadSprite("enemy2", "assets/fireasteroid2.png");
+loadSound("epic", "assets/epic.mp3");
 
 add([rect(width(), height()), color(0, 0, 0, 0.877)])
 
+ 
 
 const box = add([
   rect(600, 300),
@@ -36,15 +38,23 @@ scene('game', () => {
     rect(width(), height()),
     color(0, 0, 0, 1),
   ])
+ play("epic");
 
   let enemySpeed = 100;
 
   const earth = add([
     sprite("earth"),
-    pos(500,181),
-    scale(0.24),
+    pos(700, 350),
+    scale(0.24), 
     area(),
-  ])
+    origin("center"), 
+    rotate(0),
+    "earth", 
+  ]);
+  action("earth", () => {
+
+    earth.angle += 1;
+  });
 
   function spawnEnemy() {
     add([

@@ -37,9 +37,8 @@ scene('game', () => {
     color(0, 0, 0, 1),
   ])
 
-  let enemySpeed = 250;
+  let enemySpeed = 100;
 
-  
   const earth = add([
     sprite("earth"),
     pos(700, 350),
@@ -65,7 +64,7 @@ scene('game', () => {
       'enemy',
     ]);
 
-    wait(rand(1, 7), spawnEnemy);
+    wait(rand(1, 6), spawnEnemy);
   }
 
   action('enemy', (e) => {

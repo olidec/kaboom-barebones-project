@@ -42,10 +42,17 @@ scene('game', () => {
   
   const earth = add([
     sprite("earth"),
-    pos(500,181),
-    scale(0.24),
+    pos(700, 350),
+    scale(0.24), 
     area(),
-  ])
+    origin("center"), 
+    rotate(0),
+    "earth", 
+  ]);
+  action("earth", () => {
+    
+    earth.angle += 1;
+  });
 
   function spawnEnemy() {
     add([

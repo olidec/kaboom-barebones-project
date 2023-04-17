@@ -3,7 +3,7 @@ kaboom()
 loadSprite("earth", "assets/earth.png"),
 loadSprite("enemy", "assets/fireasteroid.png");
 loadSprite("enemy2", "assets/fireasteroid2.png");
-// loadSprite("space", "assets/space.png"),
+
 add([rect(width(), height()), color(0, 0, 0, 0.877)])
 
 

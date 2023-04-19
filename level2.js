@@ -68,10 +68,19 @@ onKeyDown("right", () => {
   dino.move(700, 0);
 });
 
+onKeyDown("up", () => {
+  dino.move(0, -700);
+});
+
+onKeyDown("down", () => {
+  dino.move(0, 700);
+});
+
 function addNuggets() {
   const dino = get('dino')[0];
   
-  loop(0.6, () => {
+  loop(1.6, () => { 
+    // change the number to change speed of nugget add
     const randomNugget = choose(["nugget1", "nugget2", "nugget3", 
     "burntNugget1",
     // "burntNugget2", 
@@ -80,11 +89,11 @@ function addNuggets() {
     
     const nugget = add([
       sprite(randomNugget),
-      pos(rand(vec2(width(), 10))),
+      pos(rand(vec2(width(),600))), 
+      // change the pos, so both the x and y values are random
       scale(0.15),
       area(),
       solid(),
-      body(),
       randomNugget,
       { isBurntNugget: randomNugget.startsWith('burnt') },
     ]);

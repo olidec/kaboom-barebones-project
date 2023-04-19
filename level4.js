@@ -47,7 +47,7 @@ scene('game', () => {
 play("jazz");
 
 add([
-  pos(0,560),
+  pos(0,height()),
   rect(width(),height()/5),
   color(255,255,255,0.2),
   area(),

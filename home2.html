@@ -6,6 +6,12 @@
         background-image: url("assets/homebg2.png");
         background-size: cover;
     }
+	#image {
+            position: absolute;
+            top: -15%;
+            left: 60%;
+			scale: 33%;
+        }
 	#level1 {
         position: absolute;
         top: 10%;
@@ -36,8 +42,27 @@
 	<title>Document</title>
 </head>
 <body>
+	<img id="image" src="assets/sfEnemy.png" id="image">
     <div id="game"></div>
+	<script>
+	const image = document.getElementById("image");
+let x = 0;
+let y = 0;
 
+document.addEventListener("keydown", (event) => {
+    if (event.key === "w") {
+        y -= 60;
+    } else if (event.key === "a") {
+        x -= 60;
+    } else if (event.key === "s") {
+        y += 60;
+    } else if (event.key === "d") {
+        x += 60;
+    }
+    image.style.transform = `translate(${x}px, ${y}px)`;
+});
+	</script>
+	
 	<script src="level1.js"></script>
 	<script src="level2.js"></script>
 	<script src="level3.js"></script>
@@ -47,4 +72,5 @@
 	<a href="level2.html" id="level2" type="text/javascript">Level 2</a><br>
 
 </body>
+<div id="game"></div>
 </html>

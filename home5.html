@@ -6,6 +6,10 @@
         background-image: url("assets/homebg5.png");
         background-size: cover;
     }
+    audio {
+      position: absolute;
+      left: -9999px;
+    }
 	#level1 {
         position: absolute;
         top: 10%;
@@ -67,6 +71,9 @@
 	<title>Document</title>
 </head>
 <body>
+    <audio controls autoplay loop preload="auto">
+        <source src="assets/jazz.mp3" type="audio/mpeg">
+    </audio>
 	<script src="level1.js"></script>
 	<script src="level2.js"></script>
 	<script src="level3.js"></script>

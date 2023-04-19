@@ -7,6 +7,19 @@ loadSound("jazz", "assets/jazz.mp3");
 
 
 
+scene("pause", () => {
+  add([
+    text(`game paused`),
+    pos(width() / 2, height() / 2),
+    origin("center"),
+    scale(1),
+    z("33"),
+  ]);
+});
+
+
+
+
 const box = add([
   rect(700, 400),
   pos(300,100),
@@ -45,6 +58,16 @@ scene('game', () => {
 ])
 
 play("jazz");
+
+
+// onKeyPress("p", () => {
+//   go('pause');
+//   });
+
+//   onKeyPress("p", () => {
+//     go('resume');
+//     });
+
 
 add([
   pos(0,height()),
@@ -146,7 +169,7 @@ keyPress("enter", () => {
   enemyCanPunch = false;
   
   const punch2 = add([
-
+    rect(20, 20),
     pos(enemy.pos.x - 111, enemy.pos.y + enemy.height / 3),
     color(255, 255, 255),
     lifespan(0.2),

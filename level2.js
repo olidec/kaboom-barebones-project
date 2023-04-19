@@ -90,7 +90,6 @@ function addNuggets() {
     const nugget = add([
       sprite(randomNugget),
       pos(rand(vec2(width(),600))), 
-      // change the pos, so both the x and y values are random
       scale(0.15),
       area(),
       solid(),

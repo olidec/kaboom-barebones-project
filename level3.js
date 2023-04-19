@@ -9,7 +9,33 @@ const sprite2 = loadSprite("jnrDino2","assets/jnrDino2.png");
 const sprite3 = loadSprite("jnrDino3","assets/jnrDino3.png");
 loadSound("jazz", "assets/jazz.mp3");
 
+play("jazz");
 
+const box = add([
+  rect(600, 300),
+  pos(350,150),
+  color(92,150,90),
+  z(2)
+]);
+
+const myText = add([
+  text("ohhhh, fun little easter egg!"),
+  pos(400,280),
+  scale(0.28),
+  color(255, 255, 255),
+  z(3333)
+]);
+
+
+myText.text ="Press space bar to jump over obstacles!"
+
+
+
+onKeyPress("space", () => {
+destroy(myText);
+destroy(box);
+go('game');
+});
 
 let score = 0
 
@@ -34,38 +60,12 @@ scene("gameover", () => {
     window.open("home4.html", "_blank");
   });
 
-onKeyPress("space", () => {
-    go("game")
-  })
+// onKeyPress("space", () => {
+//     go("game")
+//   })
 })
 
-play("jazz");
 
-const box = add([
-  rect(600, 300),
-  pos(350,150),
-  color(92,150,90),
-  z(2)
-]);
-
-const myText = add([
-  text("ohhhh, fun little easter egg!"),
-  pos(400,280),
-  scale(0.28),
-  color(255, 255, 255),
-  z(3)
-]);
-
-
-myText.text ="Press space bar to jump over obstacles!"
-
-
-
-onKeyPress("space", () => {
-destroy(myText);
-destroy(box);
-go('game');
-});
 
 
 scene("game", () => {
@@ -140,4 +140,4 @@ onCollide("dino","Object", () => {
 
  
 
-go("game")
+// go("game")

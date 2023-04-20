@@ -6,6 +6,10 @@
         background-image: url("assets/homebg2.png");
         background-size: cover;
     }
+	  audio {
+      position: absolute;
+      left: -9999px;
+    }
 	#image {
             position: absolute;
             top: -15%;
@@ -62,7 +66,9 @@ document.addEventListener("keydown", (event) => {
     image.style.transform = `translate(${x}px, ${y}px)`;
 });
 	</script>
-	
+	   <audio controls autoplay loop preload="auto">
+        <source src="assets/jazz.mp3" type="audio/mpeg">
+    </audio>
 	<script src="level1.js"></script>
 	<script src="level2.js"></script>
 	<script src="level3.js"></script>
